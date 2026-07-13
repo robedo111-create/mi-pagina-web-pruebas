@@ -1,10 +1,38 @@
-.idea
-.venv
-venv
-allure-results
-allure-report
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Archivos de caché de Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Reportes y resultados de pruebas
+allure-results/
+allure-report/
 .pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDs de archivos de sistema
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+*.tmp
+
+# Archivos con datos sensibles
+.env
+.secrets
+config.ini
+
+# Archivos comprimidos o descargas
+*.zip
+*.tar.gz
