@@ -5,11 +5,11 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:  # Permite ejecutar manualmente desde GitHub
+  workflow_dispatch:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Usa un servidor Linux gratuito de GitHub
+    runs-on: ubuntu-latest
     
     steps:
     - name: 📥 Clonar el repositorio
@@ -18,7 +18,7 @@ jobs:
     - name: 🐍 Instalar Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'  # Versión estable de Python
+        python-version: '3.11'
     
     - name: 📦 Instalar Poetry
       run: pip install poetry
@@ -42,29 +42,3 @@ jobs:
       with:
         name: allure-report
         path: allure-report
-    
-    - name: 📤 Subir resultados de Allure
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-results
-        path: allure-results
-
-  deploy-report:
-    needs: test
-    runs-on: ubuntu-latest
-    if: always()
-    
-    steps:
-    - name: 📥 Descargar reporte
-      uses: actions/download-artifact@v4
-      with:
-        name: allure-report
-        path: allure-report
-    
-    - name: 🚀 Publicar reporte en GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./allure-report
-        destination_dir: ./allure-report
-        keep_files: false
